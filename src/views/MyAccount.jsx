@@ -10,7 +10,7 @@ function MyAccount() {
 
     const [username, setUsername] = useState(storedUser.username);
     const [password, setPassword] = useState(storedUser.password);
-    const [phoneNumber, setPhoneNumber] = useState(storedUser.phoneNumber || '');
+    const [phoneNumber, setPhoneNumber] = useState(storedUser.phone_number || '');
 
     const updateUser = e => {
         e.preventDefault()
