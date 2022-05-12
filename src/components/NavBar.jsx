@@ -21,7 +21,7 @@ function NavBar() {
                 <br />
                 <br />
                 <StyledLink className="sidebar-item" color="white" to="/my-account">My account</StyledLink>
-                <StyledLink className="sidebar-item" color="white" to="/">Home</StyledLink>
+                <StyledLink className="sidebar-item" color="white" to="/home">Home</StyledLink>
                 <StyledLink className="sidebar-item" color="white" to="/categories">Categories</StyledLink>
                 <StyledLink className="sidebar-item" color="white" to="/logout">Logout</StyledLink>
             </div>
