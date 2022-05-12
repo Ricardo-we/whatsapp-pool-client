@@ -17,6 +17,7 @@ function App() {
 
 	useEffect(() => {
 		if((!storedUser.id || !storedUser.auth_token) && window.location.pathname !== '/') window.location.href = "/"
+		if((storedUser.id || storedUser.auth_token) && window.location.pathname === '/') window.location.href = "/home"
 	}, [storedUser])
 
 	return (
