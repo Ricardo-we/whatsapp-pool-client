@@ -1,7 +1,7 @@
 import Card from "./Card"
 import { confirmAlert } from "react-confirm-alert"
 import { Button, Container } from '../components/styled-components/exports';
-import { BiPencil, BiTrash, BiSend } from 'react-icons/bi';
+import { BiPencil, BiTrash, BiSend, BiCopy } from 'react-icons/bi';
 import { sendMessageToWhatsapp } from "../services/messages-requests";
 import { useContext, useState } from "react";
 import { AppContext } from './../App';
@@ -10,7 +10,7 @@ import { BaseTheme } from "./styled-components/ThemeProvider";
 
 export const MessageCard = ({ message, onUpdate, onDelete }) => {
     const { storedUser } = useContext(AppContext)
-    const [loading, setLoading] = useState(false);
+    const [copied, setCopied] = useState(false);
 
     const onDelete_ = () => {
         confirmAlert({
@@ -48,6 +48,17 @@ export const MessageCard = ({ message, onUpdate, onDelete }) => {
                     </Button>
                     <Button marginX="0px" color="info" onClick={uploadMessage}>
                         <BiSend/>
+                    </Button>
+                    <Button 
+                        marginX="0px" 
+                        color="info" 
+                        onClick={() => {
+                            setCopied(true);
+                            navigator.clipboard.writeText(message.message)
+                                .then(() => setTimeout(() => setCopied(false), 1000));
+                        }}
+                    >
+                        {copied ? 'copied!' : <BiCopy/>}
                     </Button>
                 </>
             } 
