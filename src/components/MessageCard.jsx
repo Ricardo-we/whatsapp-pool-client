@@ -55,7 +55,8 @@ export const MessageCard = ({ message, onUpdate, onDelete }) => {
                         onClick={() => {
                             setCopied(true);
                             navigator.clipboard.writeText(message.message)
-                                .then(() => setTimeout(() => setCopied(false), 1000));
+                                .then(() => setTimeout(() => setCopied(false), 1000))
+                                .catch(error => toast.error(error.toString()));
                         }}
                     >
                         {copied ? 'copied!' : <BiCopy/>}
