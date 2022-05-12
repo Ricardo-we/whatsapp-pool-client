@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import { createContext, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useLocalStorage } from "./hooks/useLocalStorage";
 // CSS
@@ -14,6 +14,10 @@ export const AppContext = createContext({});
 
 function App() {
 	const [storedUser, setStoredUser] = useLocalStorage('user');
+
+	useEffect(() => {
+		if((!storedUser.id || !storedUser.auth_token) && window.location.pathname !== '/') window.location.href = "/"
+	}, [storedUser])
 
 	return (
 		<AppContext.Provider value={{storedUser, setStoredUser}}>
