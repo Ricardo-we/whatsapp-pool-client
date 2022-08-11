@@ -29,15 +29,14 @@ export function UserHomepage({ }) {
             .then(res => setCategories(res))
     }
 
-    const addMessage = (message, messageTo, categorie_id, message_to_number) => {
-        const messageData = { message, message_to:messageTo, categorie_id, message_to_number }
-        return addMessageRequest(storedUser, messageData)
+    const addMessage = (data) => {
+        return addMessageRequest(storedUser, data)
             .then(getUserMessages)
             .catch(error => toast.error(error.toString()));
     }
 
-    const updateMessage = (message, messageTo, categorie_id, message_to_number) =>  {
-        const messageData = { message, message_to:messageTo, categorie_id, message_to_number }
+    const updateMessage = (message, messageTo, categorie_id, message_to_number) => {
+        const messageData = { message, message_to: messageTo, categorie_id, message_to_number }
         return updateMessageRequest(storedUser, selectedMessage.id, messageData)
             .then(getUserMessages)
             .catch(error => toast.error(error.toString()));
@@ -67,43 +66,43 @@ export function UserHomepage({ }) {
             <ToastContainer />
 
             <Container width="100%">
-                <Input onChange={e => setSearch(e.target.value.toLocaleLowerCase())} placeholder="Search messages"/>
+                <Input onChange={e => setSearch(e.target.value.toLocaleLowerCase())} placeholder="Search messages" />
                 <CategoriesSelect
                     width="100%"
-                    categories={categories} 
-                    value={filterByCategorie || "0"} 
+                    categories={categories}
+                    value={filterByCategorie || "0"}
                     onChange={e => setFilterByCategorie(parseInt(e.target.value))}
                 />
             </Container>
 
             <Button link onClick={() => setCreateMessageModalOpen(true)}>
-                <BiPlus size="25px"/>
+                <BiPlus size="25px" />
             </Button>
 
-            <MessageFormModal 
+            <MessageFormModal
                 defaults={selectedMessage}
                 title="Update message"
-                open={updateModalOpen} 
+                open={updateModalOpen}
                 onClose={() => setUpdateModalOpen(false)}
                 onSubmit={updateMessage}
                 categories={categories}
             />
-            <MessageFormModal 
+            <MessageFormModal
                 title="Add message"
-                open={createMessageModalOpen} 
+                open={createMessageModalOpen}
                 onClose={() => setCreateMessageModalOpen(false)}
                 onSubmit={addMessage}
                 categories={categories}
             />
 
-            {userMessages && 
+            {userMessages &&
                 userMessages
                     .filter(message => filterByCategorie && filterByCategorie >= 0 ? message.categorie === filterByCategorie : true)
                     .filter(message => message.message.toLowerCase().includes(search))
                     .map((message, index) => (
-                        <MessageCard 
-                            key={index} 
-                            message={message} 
+                        <MessageCard
+                            key={index}
+                            message={message}
                             onUpdate={() => {
                                 setSelectedMessage(message);
                                 setUpdateModalOpen(true);
@@ -116,14 +115,14 @@ export function UserHomepage({ }) {
     )
 }
 
-const MessageFormModal = ({ open, onClose, onSubmit, defaults, title, categories }) =>{
+const MessageFormModal = ({ open, onClose, onSubmit, defaults, title, categories }) => {
     return (
         <BaseModal
             isOpen={open}
             onRequestClose={onClose}
         >
-            <MessageForm onSubmit={onSubmit} defaults={defaults} title={title} categories={categories}/>
+            <MessageForm onSubmit={onSubmit} defaults={defaults} title={title} categories={categories} />
         </BaseModal>
     )
-} 
+}
 

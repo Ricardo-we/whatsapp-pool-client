@@ -12,7 +12,7 @@ export const BaseTheme = {
         black: '#000',
         white: '#fff',
         light: '#70706e',
-        gray:  '#313131',
+        gray: '#313131',
     },
     borders: {
         border: `1px solid #000`,
@@ -20,9 +20,9 @@ export const BaseTheme = {
     }
 }
 
-export const Theme = createContext({...BaseTheme});
+export const Theme = createContext({ ...BaseTheme });
 
 export const handleThemeColors = (props) => {
-    if(props.Theme && props.Theme.colors)return props.Theme.colors[props.color]
+    if (props.Theme && props.Theme.colors) return props.Theme.colors[props.color]
     return BaseTheme.colors[props.color || 'primary'];
 }
